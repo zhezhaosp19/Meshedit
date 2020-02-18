@@ -117,11 +117,12 @@ if(WIN32)
 
   if(MSVC)
 
-    set(MSVC_CXX_FLAGS "-std=c++11")
+    set(MSVC_CXX_FLAGS "/std=c++14")
 
     if(BUILD_DEBUG)
-        set(CMAKE_BUILD_TYPE Debug)
+      set(CMAKE_BUILD_TYPE Debug)
     else(BUILD_DEBUG)
+      set(MSVC_CXX_FLAGS "${MSVC_CXX_FLAGS} /O2")
     endif(BUILD_DEBUG)
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${MSVC_CXX_FLAGS}")
@@ -149,9 +150,7 @@ endif(WIN32)
 
 # Required packages
 find_package(OpenGL REQUIRED)
-if(NOT WIN32)
-  find_package(Freetype REQUIRED)
-endif()
+find_package(Freetype REQUIRED)
 
 # CGL
 if(BUILD_LIBCGL)

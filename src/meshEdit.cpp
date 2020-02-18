@@ -233,8 +233,8 @@ namespace CGL {
         reset_camera();
         break;
 
-      case 'u':
-      case 'U':
+      case 'l':
+      case 'L':
         mesh_up_sample();
         break;
 

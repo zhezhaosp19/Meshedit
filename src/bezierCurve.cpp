@@ -22,7 +22,6 @@ namespace CGL {
       fscanf(file, "%lf %lf", &controlPoints[i].x, &controlPoints[i].y);
     }
 
-    evaluatedLevels.push_back(std::vector<Vector2D>(controlPoints));
   }
 
   void BezierCurve::render()
@@ -78,12 +77,15 @@ namespace CGL {
     }
 
     if (eval_level) {
-      evaluatedLevels.clear();
-      evaluatedLevels.push_back(controlPoints);
+      //Temporary vector to hold all levels we want to display
+      std::vector<std::vector<Vector2D> > evaluatedLevels;
 
-      for (int i = 0; i < eval_level; ++i)
-        evaluateStep();
-
+      std::vector<Vector2D> points = controlPoints;
+      evaluatedLevels.push_back(points);
+      for (int i = 0; i < eval_level; ++i){
+        points = evaluateStep(points);
+        evaluatedLevels.push_back(points);
+      }
       glColor3f(0.0, 0.0, 1.0);
       glBegin(GL_LINES);
       for (int level = 1; level < evaluatedLevels.size(); level++)
@@ -128,11 +130,13 @@ namespace CGL {
     for (float p = 0.0; p <= 1.0f; p += 0.005f)
     {
       t = p;
-      evaluatedLevels.clear();
+      std::vector<std::vector<Vector2D> > evaluatedLevels;
       evaluatedLevels.push_back(controlPoints);
+      std::vector<Vector2D> points = controlPoints;
       for (int i = 0; i < numControlPoints - 1; i++)
       {
-        evaluateStep();
+        points = evaluateStep(points);
+        evaluatedLevels.push_back(points);
       }
       std::vector<Vector2D>& lastLevel = evaluatedLevels[evaluatedLevels.size() - 1];
       curvePoints.push_back(lastLevel[0]);

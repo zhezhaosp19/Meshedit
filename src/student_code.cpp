@@ -5,35 +5,59 @@ using namespace std;
 
 namespace CGL
 {
-  void BezierCurve::evaluateStep()
-  {
+
+  /**
+   * Evaluates one step of the de Casteljau's algorithm using the given points and
+   * the scalar parameter t (class member).
+   *
+   * @param points A vector of points in 2D
+   * @return A vector containing intermediate points or the final interpolated vector
+   */
+  std::vector<Vector2D> BezierCurve::evaluateStep(std::vector<Vector2D> const &points)
+  { 
     // TODO Part 1.
-    // Perform one step of the Bezier curve's evaluation at t using de Casteljau's algorithm for subdivision.
-    // Store all of the intermediate control points into the 2D vector evaluatedLevels.
-  
+    return std::vector<Vector2D>();
   }
 
-
-  Vector3D BezierPatch::evaluate(double u, double v) const
+  /**
+   * Evaluates one step of the de Casteljau's algorithm using the given points and
+   * the scalar parameter t (function parameter).
+   *
+   * @param points    A vector of points in 3D
+   * @param t         Scalar interpolation parameter
+   * @return A vector containing intermediate points or the final interpolated vector
+   */
+  std::vector<Vector3D> BezierPatch::evaluateStep(std::vector<Vector3D> const &points, double t) const
   {
     // TODO Part 2.
-    // Evaluate the Bezier surface at parameters (u, v) through 2D de Casteljau subdivision.
-    // (i.e. Unlike Part 1 where we performed one subdivision level per call to evaluateStep, this function
-    // should apply de Casteljau's algorithm until it computes the final, evaluated point on the surface)
-
-    return Vector3D(0,0,0);
+    return std::vector<Vector3D>();
   }
 
-
-  Vector3D BezierPatch::evaluate1D(std::vector<Vector3D> points, double t) const
+  /**
+   * Fully evaluates de Casteljau's algorithm for a vector of points at scalar parameter t
+   *
+   * @param points    A vector of points in 3D
+   * @param t         Scalar interpolation parameter
+   * @return Final interpolated vector
+   */
+  Vector3D BezierPatch::evaluate1D(std::vector<Vector3D> const &points, double t) const
   {
     // TODO Part 2.
-    // Optional helper function that you might find useful to implement as an abstraction when implementing BezierPatch::evaluate.
-    // Given an array of 4 points that lie on a single curve, evaluates the Bezier curve at parameter t using 1D de Casteljau subdivision.
-
-    return Vector3D(0,0,0);
+    return Vector3D();
   }
 
+  /**
+   * Evaluates the Bezier patch at parameter (u, v)
+   *
+   * @param u         Scalar interpolation parameter
+   * @param v         Scalar interpolation parameter (along the other axis)
+   * @return Final interpolated vector
+   */
+  Vector3D BezierPatch::evaluate(double u, double v) const 
+  {  
+    // TODO Part 2.
+    return Vector3D();
+  }
 
   Vector3D Vertex::normal( void ) const
   {
@@ -41,34 +65,29 @@ namespace CGL
     // Returns an approximate unit normal at this vertex, computed by
     // taking the area-weighted average of the normals of neighboring
     // triangles, then normalizing.
-
-    return Vector3D(0,0,0);
+    return Vector3D();
   }
-
 
   EdgeIter HalfedgeMesh::flipEdge( EdgeIter e0 )
   {
     // TODO Part 4.
     // This method should flip the given edge and return an iterator to the flipped edge.
- 
- 	  return EdgeIter();
+    return EdgeIter();
   }
-
 
   VertexIter HalfedgeMesh::splitEdge( EdgeIter e0 )
   {
     // TODO Part 5.
     // This method should split the given edge and return an iterator to the newly inserted vertex.
     // The halfedge of this vertex should point along the edge that was split, rather than the new edges.
-
-  	return VertexIter();
+    return VertexIter();
   }
+
 
 
   void MeshResampler::upsample( HalfedgeMesh& mesh )
   {
     // TODO Part 6.
     // This routine should increase the number of triangles in the mesh using Loop subdivision.
-
   }
 }

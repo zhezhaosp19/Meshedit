@@ -129,11 +129,10 @@ if(WIN32)
 
   if(MSVC)
 
-    set(MSVC_CXX_FLAGS "-std=c++11")
-
     if(CGL_BUILD_DEBUG)
         set(CMAKE_BUILD_TYPE Debug)
     else(CGL_BUILD_DEBUG)
+      set(MSVC_CXX_FLAGS "/O2")
     endif(CGL_BUILD_DEBUG)
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${MSVC_CXX_FLAGS}")
